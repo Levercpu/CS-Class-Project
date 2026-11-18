@@ -19,6 +19,14 @@ public class ChessBoard {
             System.out.println();
         }
     }
+    public boolean attemptMove(Square from, Square to) {
+        if (from.getPiece().getValidMoves().contains(to)) {
+            from.getPiece().moveTo(to);
+            return true;
+        }
+        return false;
+
+    }
     public static void main(String[] args) {
         
     }

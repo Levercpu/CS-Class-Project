@@ -14,4 +14,10 @@ public class Square {
     public Piece getPiece() {
         return currentPiece;
     }
+    public void setPiece(Piece newPiece) {
+        currentPiece = newPiece;
+        if (newPiece == null) {
+            occupied = false;
+        }
+    }
 }

@@ -13,6 +13,11 @@ abstract public class Piece {
         currentlyOn = startingSquare;
         this.isWhite = isWhite;
     }
+    public void moveTo(Square other) {
+        currentlyOn.setPiece(null);
+        currentlyOn = other;
+        other.setPiece(this);
+    }
     public ArrayList<Square> getHorizontalLine() {
         ArrayList<Square> squares = new ArrayList<Square>();
         for (int i = 0; i < currentlyOn.x; i++) {
