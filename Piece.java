@@ -1,3 +1,3 @@
-public class Piece {
-
+abstract public class Piece {
+    public abstract Square[] validMoves;
 }
