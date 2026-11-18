@@ -16,40 +16,29 @@ abstract public class Piece {
     public ArrayList<Square> getHorizontalLine() {
         ArrayList<Square> squares = new ArrayList<Square>();
         for (int i = 0; i < currentlyOn.x; i++) {
-            if (!ChessBoard.getSquareOccupied(i, currentlyOn.y)) {
-                squares.add(ChessBoard.getSquare(i, currentlyOn.y));
-            }
-            else {
+            if (ChessBoard.getSquareOccupied(i, currentlyOn.y))
                 break;
-            }
+            squares.add(ChessBoard.getSquare(i, currentlyOn.y));
         }
         for (int i = currentlyOn.x + 1; i < 8; i++) {
-            if (!ChessBoard.getSquareOccupied(i, currentlyOn.y)) {
-                squares.add(ChessBoard.getSquare(i, currentlyOn.y));
-            }
-            else {
+            if (ChessBoard.getSquareOccupied(i, currentlyOn.y))
                 break;
-            }
+            squares.add(ChessBoard.getSquare(i, currentlyOn.y));
+
         }
         return squares;
     }
     public ArrayList<Square> getVerticalLine() {
         ArrayList<Square> squares = new ArrayList<Square>();
         for (int i = 0; i < currentlyOn.y; i++) {
-            if (!ChessBoard.getSquareOccupied(currentlyOn.x, i)) {
-                squares.add(ChessBoard.getSquare(currentlyOn.x, i));
-            }
-            else {
+            if (ChessBoard.getSquareOccupied(currentlyOn.x, i))
                 break;
-            }
+            squares.add(ChessBoard.getSquare(currentlyOn.x, i));
         }
         for (int i = currentlyOn.y + 1; i < 8; i++) {
-            if (!ChessBoard.getSquareOccupied(currentlyOn.x, i)) {
-                squares.add(ChessBoard.getSquare(currentlyOn.x, i));
-            }
-            else {
+            if (ChessBoard.getSquareOccupied(currentlyOn.x, i))
                 break;
-            }
+            squares.add(ChessBoard.getSquare(currentlyOn.x, i));
         }
         return squares;
     }
@@ -62,38 +51,26 @@ abstract public class Piece {
         // you could loop over every square in the chessboard and run an if to do it easier, but I wanted to be precise
 
         for (int i = 0; i < Math.min(rightBoundary, topBoundary); i++) {
-            if (!ChessBoard.getSquareOccupied(currentlyOn.x + i, currentlyOn.y + i)) {
-                squares.add(ChessBoard.getSquare(currentlyOn.x + i, currentlyOn.y + i));
-            }
-            else {
+            if (ChessBoard.getSquareOccupied(currentlyOn.x + i, currentlyOn.y + i))
                 break;
-            }
+            squares.add(ChessBoard.getSquare(currentlyOn.x + i, currentlyOn.y + i));
 
         }
         for (int i = 0; i < Math.min(leftBoundary, topBoundary); i++) {
-            if (!ChessBoard.getSquareOccupied(currentlyOn.x - i, currentlyOn.y + i)) {
-                squares.add(ChessBoard.getSquare(currentlyOn.x - i, currentlyOn.y + i));
-            }
-            else {
+            if (!ChessBoard.getSquareOccupied(currentlyOn.x - i, currentlyOn.y + i))
                 break;
-            }
+            squares.add(ChessBoard.getSquare(currentlyOn.x - i, currentlyOn.y + i));
         }
         for (int i = 0; i < Math.min(leftBoundary, bottomBoundary); i++) {
-            if (!ChessBoard.getSquareOccupied(currentlyOn.x - i, currentlyOn.y + i)) {
-                squares.add(ChessBoard.getSquare(currentlyOn.x - i, currentlyOn.y - i));
-            }
-            else {
+            if (!ChessBoard.getSquareOccupied(currentlyOn.x - i, currentlyOn.y + i))
                 break;
-            }
+            squares.add(ChessBoard.getSquare(currentlyOn.x - i, currentlyOn.y - i));
 
         }
         for (int i = 0; i < Math.min(rightBoundary, bottomBoundary); i++) {
-            if (!ChessBoard.getSquareOccupied(currentlyOn.x + i, currentlyOn.y - i)) {
-                squares.add(ChessBoard.getSquare(currentlyOn.x + i, currentlyOn.y - i));
-            }
-            else {
+            if (!ChessBoard.getSquareOccupied(currentlyOn.x + i, currentlyOn.y - i))
                 break;
-            }
+            squares.add(ChessBoard.getSquare(currentlyOn.x + i, currentlyOn.y - i));
         }
         return squares;
     }
