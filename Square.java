@@ -11,4 +11,7 @@ public class Square {
         this.y = y;
         occupied = false;
     }
+    public Piece getPiece() {
+        return currentPiece;
+    }
 }

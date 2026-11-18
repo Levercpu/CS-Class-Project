@@ -4,6 +4,7 @@ abstract public class Piece {
     Square currentlyOn;
     boolean isWhite;
     public Square[] validMoves;
+    public String type;
     public abstract ArrayList<Square> getValidMoves();
     public ArrayList<Square> getValidCaptures() {
         return new ArrayList<Square>(); // TODO: just use the movement methods but only the exact squares that would break the loop~
