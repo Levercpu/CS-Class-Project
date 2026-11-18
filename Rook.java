@@ -1,7 +1,14 @@
 import java.util.ArrayList;
 
 public class Rook extends Piece {
-    public Square[] validMoves (){
+    public Rook(Square startingSquare, boolean isWhite) {
+        super(startingSquare, isWhite);
+    }
+    public ArrayList<Square> getValidMoves() {
+        ArrayList<Square> rookMoves = getHorizontalLine();
+        rookMoves.addAll(getVerticalLine());
+        return rookMoves;
+        /*
         ArrayList<Square> possibleMoves = new ArrayList<Square>();
         for (int x=currentlyOn.x+1;x<8; x++) {
             int y = currentlyOn.y;
@@ -35,6 +42,7 @@ public class Rook extends Piece {
                 possibleMoves.add(ChessBoard.getSquare(x,y));
             }
         }
-        return possibleMoves.toArray(new Square[0]);
+        return possibleMoves;
+         */
     }
 }

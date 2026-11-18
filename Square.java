@@ -6,4 +6,9 @@ public class Square {
     public boolean getOccupied() {
         return occupied;
     }
+    public Square(int x, int y) {
+        this.x = x;
+        this.y = y;
+        occupied = false;
+    }
 }
