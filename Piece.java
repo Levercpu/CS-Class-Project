@@ -6,7 +6,7 @@ abstract public class Piece {
     public Square[] validMoves;
     public abstract ArrayList<Square> getValidMoves();
     public ArrayList<Square> getValidCaptures() {
-        return getValidMoves(); // TODO: don't forget to override this for the pawn please~
+        return new ArrayList<Square>(); // TODO: just use the movement methods but only the exact squares that would break the loop~
     }
     public Piece(Square startingSquare, boolean isWhite) {
         currentlyOn = startingSquare;
