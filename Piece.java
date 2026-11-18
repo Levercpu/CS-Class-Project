@@ -1,3 +1,5 @@
 abstract public class Piece {
-    public abstract Square[] validMoves;
+    Square currentlyOn;
+    boolean isWhite;
+    public Square[] validMoves;
 }
