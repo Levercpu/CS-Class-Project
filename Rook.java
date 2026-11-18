@@ -4,6 +4,7 @@ public class Rook extends Piece {
     public Rook(Square startingSquare, boolean isWhite) {
         super(startingSquare, isWhite);
     }
+    @Override
     public ArrayList<Square> getValidMoves() {
         ArrayList<Square> rookMoves = getHorizontalLine();
         rookMoves.addAll(getVerticalLine());
