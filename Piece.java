@@ -29,7 +29,24 @@ abstract public class Piece {
     }
     public ArrayList<Square> getDiagonalLines() {
         ArrayList<Square> squares = new ArrayList<Square>();
-        // finish in a second
+        int rightBoundary = 8 - currentlyOn.x;
+        int leftBoundary = currentlyOn.x;
+        int topBoundary = 8 - currentlyOn.y;
+        int bottomBoundary = currentlyOn.y;
+        // you could loop over every square in the chessboard and run an if to do it easier, but I wanted to be precise
+
+        for (int i = 0; i < Math.min(rightBoundary, topBoundary); i++) {
+            squares.add(ChessBoard.getSquare(currentlyOn.x + i, currentlyOn.y + i));
+        }
+        for (int i = 0; i < Math.min(leftBoundary, topBoundary); i++) {
+            squares.add(ChessBoard.getSquare(currentlyOn.x - i, currentlyOn.y + i));
+        }
+        for (int i = 0; i < Math.min(leftBoundary, bottomBoundary); i++) {
+            squares.add(ChessBoard.getSquare(currentlyOn.x - i, currentlyOn.y - i));
+        }
+        for (int i = 0; i < Math.min(rightBoundary, bottomBoundary); i++) {
+            squares.add(ChessBoard.getSquare(currentlyOn.x + i, currentlyOn.y - i));
+        }
         return squares;
     }
 }
