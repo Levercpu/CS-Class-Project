@@ -13,4 +13,12 @@ public class Queen extends Piece {
         queenMoves.addAll(getDiagonalLines());
         return queenMoves;
     }
+    @Override
+    public ArrayList<Square> getValidCaptures() {
+        ArrayList<Square> captures = getHorizontalCaptures();
+        
+        captures.addAll(getVerticalCaptures());
+        captures.addAll(getVerticalCaptures());
+        return captures;
+    }
 }

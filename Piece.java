@@ -12,8 +12,18 @@ abstract public class Piece {
     public Piece(Square startingSquare, boolean isWhite) {
         currentlyOn = startingSquare;
         this.isWhite = isWhite;
+        startingSquare.setPiece(this);
     }
     public void moveTo(Square other) {
+        if (other == null || other == currentlyOn) {
+            return;
+        }
+        if (other.getOccupied() && other.getPiece().isWhite == isWhite) {
+            return;
+        }
+        if (other.getOccupied()) {
+            other.getPiece().currentlyOn = null;
+        }
         currentlyOn.setPiece(null);
         currentlyOn = other;
         other.setPiece(this);
@@ -33,6 +43,12 @@ abstract public class Piece {
         }
         return squares;
     }
+    public ArrayList<Square> getHorizontalCaptures() {
+        ArrayList<Square> captures = new ArrayList<Square>();
+        captures.addAll(getCaptureLine(-1, 0));
+        captures.addAll(getCaptureLine(1, 0));
+        return captures;
+    }
     public ArrayList<Square> getVerticalLine() {
         ArrayList<Square> squares = new ArrayList<Square>();
         for (int i = 0; i < currentlyOn.y; i++) {
@@ -47,36 +63,60 @@ abstract public class Piece {
         }
         return squares;
     }
+    public ArrayList<Square> getVerticalCaptures() {
+        ArrayList<Square> captures = new ArrayList<Square>();
+        captures.addAll(getCaptureLine(0, -1));
+        captures.addAll(getCaptureLine(0, 1));
+        return captures;
+    }
     public ArrayList<Square> getDiagonalLines() {
         ArrayList<Square> squares = new ArrayList<Square>();
-        int rightBoundary = 8 - currentlyOn.x;
-        int leftBoundary = currentlyOn.x;
-        int topBoundary = 8 - currentlyOn.y;
-        int bottomBoundary = currentlyOn.y;
-        // you could loop over every square in the chessboard and run an if to do it easier, but I wanted to be precise
+        squares.addAll(getLine(-1, -1));
+        squares.addAll(getLine(-1, 1));
+        squares.addAll(getLine(1, -1));
+        squares.addAll(getLine(1, 1));
+        return squares;
+    }
+    public ArrayList<Square> getDiagonalCaptures() {
+        ArrayList<Square> captures = new ArrayList<Square>();
+        captures.addAll(getCaptureLine(-1, -1));
+        captures.addAll(getCaptureLine(-1, 1));
+        captures.addAll(getCaptureLine(1, -1));
+        captures.addAll(getCaptureLine(1, 1));
+        return captures;
+    }
 
-        for (int i = 0; i < Math.min(rightBoundary, topBoundary); i++) {
-            if (ChessBoard.getSquareOccupied(currentlyOn.x + i, currentlyOn.y + i))
+    private ArrayList<Square> getLine(int dx, int dy) {
+        ArrayList<Square> squares = new ArrayList<Square>();
+        int x = currentlyOn.x + dx;
+        int y = currentlyOn.y + dy;
+        while (x >= 0 && x < 8 && y >= 0 && y < 8) {
+            Square square = ChessBoard.getSquare(x, y);
+            if (square.getOccupied()) {
                 break;
-            squares.add(ChessBoard.getSquare(currentlyOn.x + i, currentlyOn.y + i));
-
-        }
-        for (int i = 0; i < Math.min(leftBoundary, topBoundary); i++) {
-            if (!ChessBoard.getSquareOccupied(currentlyOn.x - i, currentlyOn.y + i))
-                break;
-            squares.add(ChessBoard.getSquare(currentlyOn.x - i, currentlyOn.y + i));
-        }
-        for (int i = 0; i < Math.min(leftBoundary, bottomBoundary); i++) {
-            if (!ChessBoard.getSquareOccupied(currentlyOn.x - i, currentlyOn.y + i))
-                break;
-            squares.add(ChessBoard.getSquare(currentlyOn.x - i, currentlyOn.y - i));
-
-        }
-        for (int i = 0; i < Math.min(rightBoundary, bottomBoundary); i++) {
-            if (!ChessBoard.getSquareOccupied(currentlyOn.x + i, currentlyOn.y - i))
-                break;
-            squares.add(ChessBoard.getSquare(currentlyOn.x + i, currentlyOn.y - i));
+            }
+            squares.add(square);
+            x += dx;
+            y += dy;
         }
         return squares;
+    }
+
+    private ArrayList<Square> getCaptureLine(int dx, int dy) {
+        ArrayList<Square> captures = new ArrayList<Square>();
+        int x = currentlyOn.x + dx;
+        int y = currentlyOn.y + dy;
+        while (x >= 0 && x < 8 && y >= 0 && y < 8) {
+            Square square = ChessBoard.getSquare(x, y);
+            if (square.getOccupied()) {
+                if (square.getPiece().isWhite != isWhite) {
+                    captures.add(square);
+                }
+                break;
+            }
+            x += dx;
+            y += dy;
+        }
+        return captures;
     }
 }

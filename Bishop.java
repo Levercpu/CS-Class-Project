@@ -10,4 +10,11 @@ public class Bishop extends Piece{
         ArrayList<Square> bishopMoves = getDiagonalLines();
         return bishopMoves;
     }
+    
+    @Override
+
+
+    public ArrayList<Square> getValidCaptures() {
+        return getDiagonalCaptures();
+    }
 }

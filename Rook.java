@@ -11,4 +11,10 @@ public class Rook extends Piece {
         rookMoves.addAll(getVerticalLine());
         return rookMoves;
     }
+    @Override
+    public ArrayList<Square> getValidCaptures() {
+        ArrayList<Square> captures = getHorizontalCaptures();
+        captures.addAll(getVerticalCaptures());
+        return captures;
+    }
 }
