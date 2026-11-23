@@ -8,7 +8,7 @@ public class ChessGUI extends JFrame {
 
     public ChessGUI(ChessBoard board) {
 
-        setTitle("Chess");
+        setTitle("Chess CS2103");
         setSize(1000, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
