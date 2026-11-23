@@ -5,15 +5,20 @@ abstract public class Piece {
     boolean isWhite;
     public Square[] validMoves;
     public String type;
+
     public abstract ArrayList<Square> getValidMoves();
+
     public ArrayList<Square> getValidCaptures() {
-        return new ArrayList<Square>(); // TODO: just use the movement methods but only the exact squares that would break the loop~
+        return new ArrayList<Square>(); // TODO: just use the movement methods but only the exact squares that would
+                                        // break the loop~
     }
+
     public Piece(Square startingSquare, boolean isWhite) {
         currentlyOn = startingSquare;
         this.isWhite = isWhite;
         startingSquare.setPiece(this);
     }
+
     public void moveTo(Square other) {
         if (other == null || other == currentlyOn) {
             return;
@@ -28,6 +33,7 @@ abstract public class Piece {
         currentlyOn = other;
         other.setPiece(this);
     }
+
     public ArrayList<Square> getHorizontalLine() {
         ArrayList<Square> squares = new ArrayList<Square>();
         for (int i = 0; i < currentlyOn.x; i++) {
@@ -43,12 +49,14 @@ abstract public class Piece {
         }
         return squares;
     }
+
     public ArrayList<Square> getHorizontalCaptures() {
         ArrayList<Square> captures = new ArrayList<Square>();
         captures.addAll(getCaptureLine(-1, 0));
         captures.addAll(getCaptureLine(1, 0));
         return captures;
     }
+
     public ArrayList<Square> getVerticalLine() {
         ArrayList<Square> squares = new ArrayList<Square>();
         for (int i = 0; i < currentlyOn.y; i++) {
@@ -63,12 +71,14 @@ abstract public class Piece {
         }
         return squares;
     }
+
     public ArrayList<Square> getVerticalCaptures() {
         ArrayList<Square> captures = new ArrayList<Square>();
         captures.addAll(getCaptureLine(0, -1));
         captures.addAll(getCaptureLine(0, 1));
         return captures;
     }
+
     public ArrayList<Square> getDiagonalLines() {
         ArrayList<Square> squares = new ArrayList<Square>();
         squares.addAll(getLine(-1, -1));
@@ -77,6 +87,7 @@ abstract public class Piece {
         squares.addAll(getLine(1, 1));
         return squares;
     }
+
     public ArrayList<Square> getDiagonalCaptures() {
         ArrayList<Square> captures = new ArrayList<Square>();
         captures.addAll(getCaptureLine(-1, -1));
@@ -118,5 +129,10 @@ abstract public class Piece {
             y += dy;
         }
         return captures;
+    }
+
+    public String getType() {
+        System.out.println(type);
+        return type;
     }
 }

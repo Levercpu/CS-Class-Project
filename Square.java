@@ -16,8 +16,6 @@ public class Square {
     }
     public void setPiece(Piece newPiece) {
         currentPiece = newPiece;
-        if (newPiece == null) {
-            occupied = false;
-        }
+        occupied = (newPiece == null) ? false : true;
     }
 }

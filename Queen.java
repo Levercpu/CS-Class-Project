@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class Queen extends Piece {
     public Queen(Square startingSquare, boolean isWhite) {
         super(startingSquare, isWhite);
+        type = "Q";
     }
-    String type = "Q";
 
     @Override
     public ArrayList<Square> getValidMoves() {
@@ -21,4 +21,5 @@ public class Queen extends Piece {
         captures.addAll(getVerticalCaptures());
         return captures;
     }
+
 }
